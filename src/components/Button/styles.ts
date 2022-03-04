@@ -3,21 +3,21 @@ import { ButtonProps } from '.';
 
 const COLOR = {
 	primary: css`
-		color: ${props => props.theme.cTertiary.main};
-		background: ${props => props.theme.cPrimary.main};
+		color: ${props => props.theme.colors.tertiary.main};
+		background: ${props => props.theme.colors.primary.main};
 
 		&:hover,
 		&:focus {
-			background: ${props => props.theme.cPrimary.hover};
+			background: ${props => props.theme.colors.primary.hover};
 		}
 	`,
 	secondary: css`
-		color: ${props => props.theme.cTertiary.main};
-		background: ${props => props.theme.cSecondary.main};
+		color: ${props => props.theme.colors.tertiary.main};
+		background: ${props => props.theme.colors.secondary.main};
 
 		&:hover,
 		&:focus {
-			background: ${props => props.theme.cSecondary.hover};
+			background: ${props => props.theme.colors.secondary.hover};
 		}
 	`,
 };
