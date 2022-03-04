@@ -46,6 +46,7 @@ interface IGenres {
 }
 
 type MoviesState = {
+	fetchedData: string[];
 	latestMovies: IMovies | null;
 	horrorMovies: IMovies | null;
 	genres: IGenres | null;

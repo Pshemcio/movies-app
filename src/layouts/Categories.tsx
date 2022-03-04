@@ -1,11 +1,11 @@
 import React from 'react';
 
 type Props = {
-	test: IMovies | null;
+	movies: IMovies | null;
 };
 
-const Categories: React.FC<Props> = ({ test }) => {
-	return <div>{test && test.title}</div>;
+const Categories: React.FC<Props> = ({ movies }) => {
+	return <div>{movies && (movies.isLoading ? 'loading' : movies.title)}</div>;
 };
 
 export default Categories;

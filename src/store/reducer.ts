@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 const initialState: MoviesState = {
+	fetchedData: [],
 	latestMovies: null,
 	horrorMovies: null,
 	genres: null,
@@ -15,24 +16,33 @@ const reducer = (
 			return {
 				...state,
 				latestMovies: prepareMoviesList(action),
+				fetchedData: addToFetched(state, action),
 			};
 		case actionTypes.FETCH_HORROR:
 			return {
 				...state,
 				horrorMovies: prepareMoviesList(action),
+				fetchedData: addToFetched(state, action),
 			};
 		case actionTypes.FETCH_GENRES:
 			return {
 				...state,
 				genres: prepareGenresList(action),
+				fetchedData: addToFetched(state, action),
 			};
 	}
 	return state;
 };
 
+const addToFetched = (state: any, action: any) => {
+	let fetchedData = state.fetchedData;
+	if (action.data.slug) fetchedData = [...state.fetchedData, action.data.slug];
+
+	return fetchedData;
+};
+
 const prepareMoviesList = (action: MoviesAction) => {
 	const { slug, title, body, isLoading } = action.data;
-	// console.log('asfasfasfsa', action);
 
 	const moviesList: IMovies = {
 		slug,

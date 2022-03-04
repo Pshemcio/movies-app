@@ -10,13 +10,13 @@ type Props = {};
 
 const Main = (props: Props) => {
 	const dispatch: Dispatch<any> = useDispatch();
+	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
+	const { latestMovies, horrorMovies, genres, fetchedData } = allMoviesData;
 
 	const getData = React.useCallback(
 		async ({ slug, title, url, action }) => {
 			try {
-				dispatch(
-					action({ slug: 'sfsf', title: 'sfs', body: {}, isLoading: true })
-				);
+				dispatch(action({ slug: '', title: '', body: {}, isLoading: true }));
 
 				const resp = await axios.get(url);
 				const data = { slug, title, body: resp.data, isLoading: false };
@@ -30,20 +30,19 @@ const Main = (props: Props) => {
 		[dispatch]
 	);
 
-	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
-	console.log('REDUXMOVIES', allMoviesData);
-
 	useEffect(() => {
 		moviesData.forEach(data => {
+			if (fetchedData.includes(data.slug)) return;
+
 			getData(data);
 		});
-	}, [getData]);
+	}, [fetchedData, getData]);
 
 	return (
 		<div>
-			<Categories test={allMoviesData.latestMovies} />
-			<Categories test={allMoviesData.horrorMovies} />
-			<Genres test={allMoviesData.genres} />
+			<Categories movies={latestMovies} />
+			<Categories movies={horrorMovies} />
+			<Genres genres={genres} />
 		</div>
 	);
 };

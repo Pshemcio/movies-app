@@ -12,13 +12,14 @@ const Router = (props: Props) => {
 					<ul>
 						<li>
 							<Link to='/'>Home</Link>
+							<Link to='/movie'>Movie</Link>
 						</li>
 					</ul>
 				</nav>
 			</div>
 			<Routes>
 				<Route path='/' element={<Main />} />
-				<Route path='/movie/:id' element={<Movie />} />
+				<Route path='/movie/' element={<Movie />} />
 			</Routes>
 		</BrowserRouter>
 	);
