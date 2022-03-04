@@ -1,9 +1,9 @@
 import * as actionTypes from './actionTypes';
 
 const initialState: MoviesState = {
-	latestMovies: [],
-	horrorMovies: [],
-	genres: [],
+	latestMovies: null,
+	horrorMovies: null,
+	genres: null,
 };
 
 const reducer = (
@@ -12,37 +12,53 @@ const reducer = (
 ): MoviesState => {
 	switch (action.type) {
 		case actionTypes.FETCH_LATEST:
-			const latest: IMovie = {
-				id: Math.random(),
-				title: action.movie.title,
-				body: action.movie.body,
-			};
 			return {
 				...state,
-				latestMovies: [latest],
+				latestMovies: prepareMoviesList(action),
 			};
 		case actionTypes.FETCH_HORROR:
-			const horror: IMovie = {
-				id: Math.random(),
-				title: action.movie.title,
-				body: action.movie.body,
-			};
 			return {
 				...state,
-				horrorMovies: [horror],
+				horrorMovies: prepareMoviesList(action),
 			};
 		case actionTypes.FETCH_GENRES:
-			const genres: IMovie = {
-				id: Math.random(),
-				title: action.movie.title,
-				body: action.movie.body,
-			};
 			return {
 				...state,
-				genres: [genres],
+				genres: prepareGenresList(action),
 			};
 	}
 	return state;
+};
+
+const prepareMoviesList = (action: MoviesAction) => {
+	const { slug, title, body, isLoading } = action.data;
+	// console.log('asfasfasfsa', action);
+
+	const moviesList: IMovies = {
+		slug,
+		title,
+		body: {
+			page: body.page,
+			total_pages: body.total_pages,
+			movies: body.results,
+		},
+		isLoading,
+	};
+
+	return moviesList;
+};
+
+const prepareGenresList = (action: MoviesAction) => {
+	const { slug, title, body: bodyData, isLoading } = action.data;
+
+	const moviesList: IGenres = {
+		slug,
+		title,
+		body: bodyData.genres,
+		isLoading,
+	};
+
+	return moviesList;
 };
 
 export default reducer;
