@@ -35,10 +35,12 @@ const reducer = (
 };
 
 const addToFetched = (state: any, action: any) => {
-	let fetchedData = state.fetchedData;
-	if (action.data.slug) fetchedData = [...state.fetchedData, action.data.slug];
+	const checkIfFetched =
+		action.data.slug && !state.fetchedData.includes(action.data.slug);
 
-	return fetchedData;
+	return checkIfFetched
+		? [...state.fetchedData, action.data.slug]
+		: state.fetchedData;
 };
 
 const prepareMoviesList = (action: MoviesAction) => {
