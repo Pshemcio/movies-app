@@ -5,7 +5,11 @@ type Props = {
 };
 
 const Genres: React.FC<Props> = ({ genres }) => {
-	return <div>{genres && (genres.isLoading ? 'loading' : genres.title)}</div>;
+	return (
+		<div>
+			{genres && (genres.isLoading ? 'loading' : genres.body && genres.title)}
+		</div>
+	);
 };
 
 export default Genres;

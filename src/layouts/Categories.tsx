@@ -5,7 +5,12 @@ type Props = {
 };
 
 const Categories: React.FC<Props> = ({ movies }) => {
-	return <div>{movies && (movies.isLoading ? 'loading' : movies.title)}</div>;
+	return (
+		<div>
+			{movies &&
+				(movies.isLoading ? 'loading' : movies.body.movies && movies.title)}
+		</div>
+	);
 };
 
 export default Categories;

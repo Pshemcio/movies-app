@@ -12,7 +12,7 @@ const Main = (props: Props) => {
 	const dispatch: Dispatch<any> = useDispatch();
 	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
 	const { latestMovies, horrorMovies, genres, fetchedData } = allMoviesData;
-	console.log(allMoviesData);
+
 	const getData = React.useCallback(
 		async ({ slug, title, url, action }) => {
 			try {
@@ -24,7 +24,7 @@ const Main = (props: Props) => {
 					dispatch(action(data));
 				}, 1000); // temp mock server delay, this api is too freakin fast!
 			} catch (error) {
-				console.log(error);
+				dispatch(action({ slug, title, body: {}, isLoading: false }));
 			}
 		},
 		[dispatch]
