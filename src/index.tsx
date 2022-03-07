@@ -1,14 +1,8 @@
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore, applyMiddleware, Store } from 'redux';
-import thunk from 'redux-thunk';
-import reducer from './store/reducer';
 import { Provider } from 'react-redux';
-
-const store: Store & {
-	dispatch: DispatchType;
-} = createStore(reducer, applyMiddleware(thunk));
+import { store } from './redux/config';
 
 ReactDOM.render(
 	<Provider store={store}>
