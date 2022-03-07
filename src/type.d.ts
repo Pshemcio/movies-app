@@ -49,6 +49,7 @@ type MoviesState = {
 	fetchedData: string[];
 	latestMovies: IMovies | null;
 	horrorMovies: IMovies | null;
+	comedyMovies: IMovies | null;
 	genres: IGenres | null;
 };
 

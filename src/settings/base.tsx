@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: contain;
     background-color: ${tertiary.main};
+    padding: 20px ;
   }
 
   a,

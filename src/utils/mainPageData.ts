@@ -1,4 +1,9 @@
-import { fetchLatest, fetchHorror, fetchGenres } from '../redux/actionCreators';
+import {
+	fetchLatest,
+	fetchHorror,
+	fetchGenres,
+	fetchComedy,
+} from '../redux/actionCreators';
 
 export const moviesData = [
 	{
@@ -12,6 +17,12 @@ export const moviesData = [
 		title: 'Horror Movies',
 		url: `discover/movie?with_genres=27`,
 		action: fetchHorror,
+	},
+	{
+		slug: 'comedy-movies',
+		title: 'Comedy Movies',
+		url: `discover/movie?with_genres=35`,
+		action: fetchComedy,
 	},
 	{
 		slug: 'genres',

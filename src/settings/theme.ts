@@ -11,7 +11,7 @@ export const mainTheme = {
 			hover: 'rgba(109,109,110,0.4)',
 		},
 		tertiary: {
-			main: '#282c34',
+			main: '#141414',
 		},
 	},
 	typography: {

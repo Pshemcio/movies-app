@@ -4,6 +4,7 @@ const initialState: MoviesState = {
 	fetchedData: [],
 	latestMovies: null,
 	horrorMovies: null,
+	comedyMovies: null,
 	genres: null,
 };
 
@@ -13,17 +14,11 @@ const reducer = (
 ): MoviesState => {
 	switch (action.type) {
 		case actionTypes.FETCH_LATEST:
-			return {
-				...state,
-				latestMovies: prepareMoviesList(action),
-				fetchedData: addToFetched(state, action),
-			};
+			return test(state, action, 'latestMovies');
 		case actionTypes.FETCH_HORROR:
-			return {
-				...state,
-				horrorMovies: prepareMoviesList(action),
-				fetchedData: addToFetched(state, action),
-			};
+			return test(state, action, 'horrorMovies');
+		case actionTypes.FETCH_COMEDY:
+			return test(state, action, 'comedyMovies');
 		case actionTypes.FETCH_GENRES:
 			return {
 				...state,
@@ -32,6 +27,18 @@ const reducer = (
 			};
 	}
 	return state;
+};
+
+const test = (
+	state: MoviesState = initialState,
+	action: MoviesAction,
+	key: string
+) => {
+	return {
+		...state,
+		[key]: prepareMoviesList(action),
+		fetchedData: addToFetched(state, action),
+	};
 };
 
 const addToFetched = (state: any, action: any) => {

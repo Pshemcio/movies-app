@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-const { FETCH_LATEST, FETCH_HORROR, FETCH_GENRES } = actionTypes;
+const { FETCH_LATEST, FETCH_HORROR, FETCH_COMEDY, FETCH_GENRES } = actionTypes;
 
 export function fetchLatest(data: IMovies) {
 	const action: MoviesAction = {
@@ -14,6 +14,15 @@ export function fetchLatest(data: IMovies) {
 export function fetchHorror(data: IMovies) {
 	const action: MoviesAction = {
 		type: FETCH_HORROR,
+		data,
+	};
+
+	return dispatchAction(action);
+}
+
+export function fetchComedy(data: IMovies) {
+	const action: MoviesAction = {
+		type: FETCH_COMEDY,
 		data,
 	};
 

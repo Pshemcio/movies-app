@@ -11,7 +11,8 @@ type Props = {};
 const Main = (props: Props) => {
 	const dispatch: Dispatch<any> = useDispatch();
 	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
-	const { latestMovies, horrorMovies, genres, fetchedData } = allMoviesData;
+	const { latestMovies, horrorMovies, comedyMovies, genres, fetchedData } =
+		allMoviesData;
 
 	useEffect(() => {
 		const fetchService = new FetchingService();
@@ -25,9 +26,10 @@ const Main = (props: Props) => {
 
 	return (
 		<div>
-			<Categories movies={latestMovies} />
-			<Categories movies={horrorMovies} />
-			<Genres genres={genres} />
+			<Categories data={latestMovies} />
+			<Categories data={horrorMovies} />
+			<Categories data={comedyMovies} />
+			<Genres data={genres} />
 		</div>
 	);
 };

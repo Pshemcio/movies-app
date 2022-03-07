@@ -1,14 +1,14 @@
 import React from 'react';
 
 type Props = {
-	genres: IGenres | null;
+	data: IGenres | null;
 };
 
-const Genres: React.FC<Props> = ({ genres }) => {
+const Genres: React.FC<Props> = ({ data }) => {
+	// console.log(data);
+
 	return (
-		<div>
-			{genres && (genres.isLoading ? 'loading' : genres.body && genres.title)}
-		</div>
+		<div>{data && (data.isLoading ? 'loading' : data.body && data.title)}</div>
 	);
 };
 
