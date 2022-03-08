@@ -2,7 +2,7 @@ import axios from 'axios';
 
 interface IMoviesData {
 	slug: string;
-	title: string;
+	name: string;
 	url: string;
 	action: any;
 }
@@ -19,9 +19,11 @@ class FetchingService {
 	}
 
 	async getMovies(data: IMoviesData, dispatch: any) {
-		const { slug, title, url, action }: IMoviesData = data;
+		const { slug, name, url, action }: IMoviesData = data;
 		try {
-			dispatch(action({ slug: '', title: '', body: {}, isLoading: true }));
+			dispatch(
+				action({ slug: slug, name: name, url: url, body: {}, isLoading: true })
+			);
 			const actualUrl = `${this.baseUrl}${url}`;
 
 			const resp = await axios.get(actualUrl, {
@@ -30,12 +32,12 @@ class FetchingService {
 				},
 			});
 
-			const data = { slug, title, body: resp.data, isLoading: false };
+			const data = { slug, name, url, body: resp.data, isLoading: false };
 			setTimeout(() => {
 				dispatch(action(data));
 			}, 400);
 		} catch (error) {
-			dispatch(action({ slug, title, body: {}, isLoading: false }));
+			dispatch(action({ slug, name, url, body: {}, isLoading: false }));
 		}
 	}
 }

@@ -1,6 +1,7 @@
 interface IAction {
 	slug: string;
-	title: string;
+	name: string;
+	url: string;
 	body: any;
 	isLoading?: boolean;
 }
@@ -24,7 +25,8 @@ interface IMovie {
 
 interface IMovies {
 	slug: string;
-	title: string;
+	name: string;
+	url: string;
 	body: {
 		page: number;
 		total_pages: number;
@@ -40,17 +42,16 @@ interface IGenre {
 
 interface IGenres {
 	slug: string;
-	title: string;
+	name: string;
+	url: string;
 	body: IGenre[];
 	isLoading?: boolean;
 }
 
 type MoviesState = {
 	fetchedData: string[];
-	latestMovies: IMovies | null;
-	horrorMovies: IMovies | null;
-	comedyMovies: IMovies | null;
-	genres: IGenres | null;
+	mainPageCategories: IMovies[];
+	genres: any;
 };
 
 type MoviesAction = {

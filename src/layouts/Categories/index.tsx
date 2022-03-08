@@ -17,7 +17,7 @@ const Categories: React.FC<Props> = ({ data }) => {
 					? 'loading'
 					: data.body.movies && (
 							<div>
-								<h2>{data.title}</h2>
+								<h2>{data.name}</h2>
 								<Swiper
 									modules={[Navigation, A11y]}
 									slidesPerView={2}

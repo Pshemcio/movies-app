@@ -5,10 +5,8 @@ type Props = {
 };
 
 const Genres: React.FC<Props> = ({ data }) => {
-	// console.log(data);
-
 	return (
-		<div>{data && (data.isLoading ? 'loading' : data.body && data.title)}</div>
+		<div>{data && (data.isLoading ? 'loading' : data.body && data.name)}</div>
 	);
 };
 

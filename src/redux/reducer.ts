@@ -2,9 +2,7 @@ import * as actionTypes from './actionTypes';
 
 const initialState: MoviesState = {
 	fetchedData: [],
-	latestMovies: null,
-	horrorMovies: null,
-	comedyMovies: null,
+	mainPageCategories: [],
 	genres: null,
 };
 
@@ -13,12 +11,8 @@ const reducer = (
 	action: MoviesAction
 ): MoviesState => {
 	switch (action.type) {
-		case actionTypes.FETCH_LATEST:
-			return test(state, action, 'latestMovies');
-		case actionTypes.FETCH_HORROR:
-			return test(state, action, 'horrorMovies');
-		case actionTypes.FETCH_COMEDY:
-			return test(state, action, 'comedyMovies');
+		case actionTypes.MAIN_CATEGORIES:
+			return updateMainCategories(state, action);
 		case actionTypes.FETCH_GENRES:
 			return {
 				...state,
@@ -29,19 +23,22 @@ const reducer = (
 	return state;
 };
 
-const test = (
+const updateMainCategories = (
 	state: MoviesState = initialState,
-	action: MoviesAction,
-	key: string
+	action: MoviesAction
 ) => {
+	const newArray = state.mainPageCategories
+		.filter((obj: IMovies) => obj.slug !== action.data.slug)
+		.concat(prepareMoviesList(action));
+
 	return {
 		...state,
-		[key]: prepareMoviesList(action),
+		mainPageCategories: newArray,
 		fetchedData: addToFetched(state, action),
 	};
 };
 
-const addToFetched = (state: any, action: any) => {
+const addToFetched = (state: MoviesState, action: MoviesAction) => {
 	const checkIfFetched =
 		action.data.slug && !state.fetchedData.includes(action.data.slug);
 
@@ -51,11 +48,12 @@ const addToFetched = (state: any, action: any) => {
 };
 
 const prepareMoviesList = (action: MoviesAction) => {
-	const { slug, title, body, isLoading } = action.data;
+	const { slug, name, url, body, isLoading } = action.data;
 
 	const moviesList: IMovies = {
 		slug,
-		title,
+		name,
+		url,
 		body: {
 			page: body.page,
 			total_pages: body.total_pages,
@@ -68,11 +66,12 @@ const prepareMoviesList = (action: MoviesAction) => {
 };
 
 const prepareGenresList = (action: MoviesAction) => {
-	const { slug, title, body: bodyData, isLoading } = action.data;
+	const { slug, name, url, body: bodyData, isLoading } = action.data;
 
 	const moviesList: IGenres = {
 		slug,
-		title,
+		name,
+		url,
 		body: bodyData.genres,
 		isLoading,
 	};

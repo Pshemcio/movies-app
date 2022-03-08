@@ -1,35 +1,63 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { moviesData } from '../utils/mainPageData';
+import { addCategories } from '../utils/mainPageData';
 import Categories from '../layouts/Categories';
-import Genres from '../layouts/Genres';
 import FetchingService from '../redux/services';
+import { fetchGenres, fetchMainCategories } from '../redux/actionCreators';
 
 type Props = {};
 
 const Main = (props: Props) => {
 	const dispatch: Dispatch<any> = useDispatch();
 	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
-	const { latestMovies, horrorMovies, comedyMovies, genres, fetchedData } =
-		allMoviesData;
+	const { genres, mainPageCategories, fetchedData } = allMoviesData;
+
+	useEffect(() => {
+		if (fetchedData.includes('genres')) return;
+
+		const getGenres = new FetchingService();
+
+		getGenres.getMovies(
+			{
+				slug: 'genres',
+				name: 'Genres',
+				url: `genre/movie/list`,
+				action: fetchGenres,
+			},
+			dispatch
+		);
+	}, [dispatch, fetchedData]);
 
 	useEffect(() => {
 		const fetchService = new FetchingService();
+		if (!genres || !genres.body) return;
 
-		moviesData.forEach(data => {
+		const modifiedGenres = genres.body.map((genre: any) => ({
+			slug: `category-${genre.id}`,
+			name: genre.name,
+			url: `discover/movie?with_genres=${genre.id}`,
+			action: fetchMainCategories,
+		}));
+
+		const mainPageData = [...addCategories, ...modifiedGenres];
+
+		mainPageData.forEach(data => {
 			if (fetchedData.includes(data.slug)) return;
 
 			fetchService.getMovies(data, dispatch);
 		});
-	}, [dispatch, fetchedData]);
+	}, [dispatch, fetchedData, genres]);
 
 	return (
 		<div>
-			<Categories data={latestMovies} />
-			<Categories data={horrorMovies} />
-			<Categories data={comedyMovies} />
-			<Genres data={genres} />
+			{!genres || !genres.body ? (
+				<h1>PAGE LOADER</h1>
+			) : (
+				mainPageCategories.map(category => (
+					<Categories key={category.slug} data={category} />
+				))
+			)}
 		</div>
 	);
 };
