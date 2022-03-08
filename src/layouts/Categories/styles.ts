@@ -30,7 +30,7 @@ export const CategoriesContainer = styled.div`
 	}
 `;
 
-export const SlideContainer = styled(Link)`
+export const SlideContainer = styled.div`
 	display: block;
 	cursor: pointer;
 	position: relative;

@@ -8,9 +8,10 @@ import CategoriesLoader from 'components/CategoriesLoader';
 
 type Props = {
 	data: IMovies | null;
+	toggleModal: any;
 };
 
-const Categories: React.FC<Props> = ({ data }) => {
+const Categories: React.FC<Props> = ({ data, toggleModal }) => {
 	return (
 		<CategoriesContainer>
 			{data &&
@@ -60,7 +61,8 @@ const Categories: React.FC<Props> = ({ data }) => {
 									} = movie;
 									return (
 										<SwiperSlide key={id}>
-											<SlideContainer to={`/movie/${id}`}>
+											{/* <SlideContainer to={`/movie/${id}`}> */}
+											<SlideContainer onClick={() => toggleModal(movie)}>
 												<img
 													alt={title}
 													src={`https://image.tmdb.org/t/p/w300/${poster_path}`}

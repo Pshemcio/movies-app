@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addCategories } from 'utils/mainPageData';
@@ -12,6 +12,12 @@ const Main = (props: Props) => {
 	const dispatch: Dispatch<any> = useDispatch();
 	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
 	const { genres, mainPageCategories, fetchedData } = allMoviesData;
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleModal = (data: any) => {
+		console.log(data);
+		setIsOpen(!isOpen);
+	};
 
 	useEffect(() => {
 		if (fetchedData.includes('genres')) return;
@@ -55,7 +61,11 @@ const Main = (props: Props) => {
 				<h1>PAGE LOADER</h1>
 			) : (
 				mainPageCategories.map(category => (
-					<Categories key={category.slug} data={category} />
+					<Categories
+						key={category.slug}
+						data={category}
+						toggleModal={toggleModal}
+					/>
 				))
 			)}
 		</div>
