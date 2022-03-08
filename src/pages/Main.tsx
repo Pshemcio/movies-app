@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { addCategories } from '../utils/mainPageData';
-import Categories from '../layouts/Categories';
-import FetchingService from '../redux/services';
-import { fetchGenres, fetchMainCategories } from '../redux/actionCreators';
+import { addCategories } from 'utils/mainPageData';
+import Categories from 'layouts/Categories';
+import FetchingService from 'redux/services';
+import { fetchGenres, fetchMainCategories } from 'redux/actionCreators';
 
 type Props = {};
 

@@ -18,6 +18,25 @@ class FetchingService {
 		this.apiKey = REACT_APP_MOVIEDB_KEY;
 	}
 
+	async getSingleMovie(id: string, setMovie: any) {
+		try {
+			const actualUrl = `${this.baseUrl}/movie/${id}`;
+
+			const resp = await axios.get(actualUrl, {
+				headers: {
+					Authorization: `Bearer ${this.apiKey}`,
+				},
+			});
+
+			setMovie(resp.data);
+		} catch (error) {
+			setMovie({
+				errorMsg: 'We had problem with fetching movie data, try again later.',
+				error,
+			});
+		}
+	}
+
 	async getMovies(data: IMoviesData, dispatch: any) {
 		const { slug, name, url, action }: IMoviesData = data;
 		try {

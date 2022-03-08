@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const CategoriesContainer = styled.div`
@@ -29,7 +30,8 @@ export const CategoriesContainer = styled.div`
 	}
 `;
 
-export const SlideContainer = styled.div`
+export const SlideContainer = styled(Link)`
+	display: block;
 	cursor: pointer;
 	position: relative;
 

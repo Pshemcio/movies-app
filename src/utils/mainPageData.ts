@@ -1,4 +1,4 @@
-import { fetchMainCategories } from '../redux/actionCreators';
+import { fetchMainCategories } from 'redux/actionCreators';
 
 export const addCategories = [
 	{
