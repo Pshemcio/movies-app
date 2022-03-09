@@ -29,7 +29,7 @@ const Categories: React.FC<Props> = ({ data, toggleModal }) => {
 								loop
 								spaceBetween={6}
 								breakpoints={{
-									300: {
+									440: {
 										slidesPerView: 3,
 										slidesPerGroup: 3,
 									},
@@ -51,17 +51,10 @@ const Categories: React.FC<Props> = ({ data, toggleModal }) => {
 									},
 								}}>
 								{data.body.movies.map(movie => {
-									const {
-										adult,
-										id,
-										poster_path,
-										release_date,
-										title,
-										vote_average,
-									} = movie;
+									const { id, poster_path, release_date, title, vote_average } =
+										movie;
 									return (
 										<SwiperSlide key={id}>
-											{/* <SlideContainer to={`/movie/${id}`}> */}
 											<SlideContainer onClick={() => toggleModal(movie)}>
 												<img
 													alt={title}
@@ -69,8 +62,8 @@ const Categories: React.FC<Props> = ({ data, toggleModal }) => {
 												/>
 												<SlideMask>
 													<h4>{title}</h4>
-													<p>{release_date}</p>
-													<p>Rating: {vote_average}</p>
+													{release_date && <p>{release_date}</p>}
+													<p>Rating: {vote_average ? vote_average : 'N/A'}</p>
 												</SlideMask>
 											</SlideContainer>
 										</SwiperSlide>

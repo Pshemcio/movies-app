@@ -28,8 +28,8 @@ export const ImageWrapper = styled.div`
 		bottom: 0;
 		z-index: 2;
 		background-image: linear-gradient(
-			transparent 0,
-			${props => props.theme.colors.tertiary.main} 100%
+			transparent 20%,
+			${props => props.theme.colors.tertiary.main} 85%
 		);
 	}
 `;

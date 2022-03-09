@@ -35,17 +35,31 @@ const MovieModal: React.FC<Props> = ({ currentMovie, setCurrentMovie }) => {
 						<ImageWrapper>
 							<img
 								alt={currentMovie.title}
-								src={`https://image.tmdb.org/t/p/original/${currentMovie.backdrop_path}`}
+								src={`https://image.tmdb.org/t/p/original/${
+									currentMovie.backdrop_path
+										? currentMovie.backdrop_path
+										: currentMovie.poster_path
+								}`}
 							/>
 						</ImageWrapper>
 						<Content>
 							<h2>{currentMovie.title}</h2>
 							<Container>
 								<p>
-									Release date: <strong>{currentMovie.release_date}</strong>
+									Release date:{' '}
+									<strong>
+										{currentMovie.release_date
+											? currentMovie.release_date
+											: 'N/A'}
+									</strong>
 								</p>
 								<p>
-									Rating: <strong>{currentMovie.vote_average} / 10</strong>
+									Rating:{' '}
+									<strong>
+										{currentMovie.vote_average
+											? `${currentMovie.vote_average} / 10`
+											: 'N/A'}
+									</strong>
 								</p>
 							</Container>
 							<p>{currentMovie.overview}</p>

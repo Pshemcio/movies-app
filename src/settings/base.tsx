@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: contain;
     background-color: ${tertiary.main};
-    padding: 20px ;
   }
 
   a,
@@ -37,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-box-shadow: 0 0 0 30px ${tertiary.main} inset !important;
     background-clip: content-box !important;
     -webkit-text-fill-color: ${secondary.main} !important;
+  }
+
+  img {
+    max-width: 100%;
   }
 `;
 

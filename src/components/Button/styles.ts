@@ -12,7 +12,7 @@ const COLOR = {
 		}
 	`,
 	secondary: css`
-		color: ${props => props.theme.colors.tertiary.main};
+		color: ${props => props.theme.colors.primary.main};
 		background: ${props => props.theme.colors.secondary.main};
 
 		&:hover,
@@ -28,7 +28,7 @@ const DISABLED = css`
 	color: #f5f5f5;
 `;
 
-export const Container = styled.button<ButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
 	padding: 10px 25px;
 	cursor: pointer;
 	border: none;

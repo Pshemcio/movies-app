@@ -11,6 +11,8 @@ export type ContainerProps = {
 		| 'space-between'
 		| 'space-around'
 		| 'space-evenly';
+	px?: number;
+	py?: number;
 	children?: React.ReactNode;
 };
 
@@ -19,6 +21,8 @@ const Container = ({
 	direction = 'row',
 	alignItems = 'center',
 	justifyContent = 'start',
+	px = 0,
+	py = 0,
 	children,
 }: ContainerProps) => {
 	return (
@@ -26,7 +30,9 @@ const Container = ({
 			display={display}
 			alignItems={alignItems}
 			justifyContent={justifyContent}
-			direction={direction}>
+			direction={direction}
+			px={px}
+			py={py}>
 			{children}
 		</StyledContainer>
 	);

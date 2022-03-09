@@ -1,9 +1,9 @@
-import { Container } from './styles';
+import { StyledLoader } from './styles';
 
 export type LoaderProps = {};
 
 const CategoriesLoader = () => {
-	return <Container></Container>;
+	return <StyledLoader>loading</StyledLoader>;
 };
 
 export default CategoriesLoader;
