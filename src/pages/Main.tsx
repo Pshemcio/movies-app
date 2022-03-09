@@ -5,18 +5,16 @@ import { addCategories } from 'utils/mainPageData';
 import Categories from 'layouts/Categories';
 import FetchingService from 'redux/services';
 import { fetchGenres, fetchMainCategories } from 'redux/actionCreators';
+import MovieModal from 'layouts/MovieModal';
 
-type Props = {};
-
-const Main = (props: Props) => {
+const Main: React.FC = () => {
 	const dispatch: Dispatch<any> = useDispatch();
 	const allMoviesData: MoviesState = useSelector((state: MoviesState) => state);
 	const { genres, mainPageCategories, fetchedData } = allMoviesData;
-	const [isOpen, setIsOpen] = useState(false);
+	const [currentMovie, setCurrentMovie] = useState<IMovie>();
 
-	const toggleModal = (data: any) => {
-		console.log(data);
-		setIsOpen(!isOpen);
+	const toggleModal = (data: IMovie) => {
+		setCurrentMovie(data);
 	};
 
 	useEffect(() => {
@@ -68,6 +66,10 @@ const Main = (props: Props) => {
 					/>
 				))
 			)}
+			<MovieModal
+				currentMovie={currentMovie}
+				setCurrentMovie={setCurrentMovie}
+			/>
 		</div>
 	);
 };
